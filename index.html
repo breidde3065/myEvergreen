@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+<link rel="stylesheet" href="index.css">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+<title>Ecostoveskenya</title>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.2/ScrollTrigger.min.js"></script>
+</head>
+<header>
+    <nav class="navclass">
+        <div class="navbar">
+            <a  href="index.html"><button class="navbtn">Home</button></a>
+            <a  href="Products.html"><button class="navbtn">Products</button></a>
+            <a  href="contacts.html"><button class="navbtn">Contact Us</button></a>
+            <a  href="about.html"><button class="navbtn">About Us</button></a>
+        <a href="cart.html" id="viewcart"><button class="navbtn">Cart <i class="fa fa-shopping-basket"></i></i> <span id="cartcount">0</span></button></a>
+    <div class="nav-slider"></div>    
+    </div>
+    </nav>
+    <script>
+        gsap.registerPlugin(ScrollTrigger);
+       
+ScrollTrigger.create({
+    start:"top -10px",
+    onEnter:()=> document.querySelectorAll(".navbtn").style.background="rgba(0,125,125,125)",
+    //onLeaveBack:()=> document.querySelectorAll(".navbtn").style.background="blue"
+});
+gsap.from(".navbtn",{
+    x:50,
+    opacity:0,
+    stagger:0.2,
+    duration:0.5
+});
+const slider=document.querySelector(".nav-slider");
+const btns=document.querySelectorAll(".navbtn");
+const navbar=document.querySelector(".navbtn");
+
+function moveslider(target){
+    const {left, width}=target.getBoundingClientRect();
+    const navbarrect=navbar.getBoundingClientRect();
+    gsap.to(slider,{
+        x:left - navbarrect.left,
+        width: linkrect.width,
+        duration:0.3,
+        ease:"power2.out"
+    });
+}
+btns.forEach(btn => {
+            btn.addEventListener("mouseenter", (e) => moveSlider(e.target));
+        });
+        btn.addEventListener("mouseleave", ()=>{
+            gsap.to(slider,{width:0,duration:0.3});
+
+        });
+
+
+        // ✅ Reset slider when mouse leaves
+       
+
+  
+    </script>
+</header>
+<body>
+    <!--div id="cartsection" class="cart-section" style="display: none;">
+        <h2>myCart</h2>
+        <ul id="cartitems"></ul>
+        <p id="totals">Total:</p>
+        <button id="checkout">Checkout</button>
+        <button id="closecart">Close</button>
+    </div>
+ <div-->   
+    <div class="section1">
+        <p class="sust">Sustainable cooking starts with an ecostove</p>
+    </div>    
+<div>
+    <section>
+        <div class="slider-container">
+            <div class="slides" >
+              <div class="slide" >
+                <div class="text1">
+                 <p>Hello there thanks for reaching out to Eco stoves Kenya. We are manufacturers of Volcanic Rock cookstoves. </p>
+                </div>
+                 <div class="image11"><img  class="image22" src="image1.jpg" alt="image1"></div>
+              </div>
+    
+              <div class="slide" >
+               <div class="text1">
+                <p>Eco stoves use reusable volcanic rocks to cook.The volcanic rocks retain heat much longer than any other fuel. Charcoal dust(lusenyente) or briquettes are used as fire starters while solar is used to power the inbuit air system that runs forced air to the stones thus increasing combustion.</p>
+               </div>
+               <div class="image11"> <img class="image22" src="image2.jpg" alt="image2"></div>
+             </div>
+             <div class="slide" >
+              <div class="text1">
+                <p>Save upto 80% in this tough economy and switch to Eco stove which is smoke ffree and save you money and time.</p>
+              </div>
+              <div class="image11">
+               <img class="image22" src="image3.jpg" alt="image3">   
+              </div>
+             </div>
+            </div>
+        
+
+    <button class="arrow left-arrow" onclick="prevSlide()">&#10094</button>
+    <button class="arrow right-arrow" onclick="nextSlide()">&#10095</button>
+        </div>    
+    <script>
+        let currentIndex=0;
+        const slides=document.querySelector('.slides');
+  const totalSlides=document.querySelectorAll('.slide').length;  
+  function showSlide(index){
+  if(index>=totalSlides){
+    currentIndex=0;
+    
+  } 
+  else if(index<0){
+    currentIndex=totalSlides-1;
+  } 
+  else{
+    currentIndex=index;
+  }
+  slides.style.transform=`translateX(-${currentIndex*100}%)`;
+}
+function nextSlide(){
+    showSlide(currentIndex+1);
+
+}
+function prevSlide(){
+    showSlide(currentIndex-1);
+}
+showSlide(0);
+
+setInterval(nextSlide,5000);
+let touchStartX=0;
+let touchEndX=0;
+document.querySelector('.slider-container').addEventListener('touchstart',(e)=>{
+    touchStartX=e.touches[0].clientX;
+});
+document.querySelector('.slider-container').addEventListener('touchend',(e)=>{
+    touchEndX=e.changedTouches[0].clientX;
+    handleSwipe();
+});
+function handleSwipe(){
+    if(touchStartX-touchEndX>50){
+        nextSlide();
+    }
+    else if(touchEndX-touchStartX>50){
+        prevSlide();
+    }
+}
+    
+       
+    </script>
+</div>
+</section>
+  <section>
+  
+   
+            <div class="gallery">
+                <h3>Products</h3>
+                 <ul  id="productlist"></ul></div>
+         </div>
+        
+         
+        </section>
+        <section>
+            <div class="alert">        
+            <h3>TO OUR VALUED CUSTOMERS</h3>
+            <P>At, Eco stoves , we take pride in our commitment to quality.We want to remind you that Eco stoves are exclusively produced in Kenya ensuring the highest standards and supporting our community.</P>
+            <h4>Beware of online scams.</h4>
+            <p>We've received reports of scammers mispresenting our brand and selling Eco Stoves inside Kenya. Please be cautious and avoid unauthorized sellers.To purchase a genuine Eco Stove, use our official communication channels.</p>
+         </div>
+        </section>
+    <section>
+    <div class="contact">
+        <h2>Contact Us</h2>
+        <p>
+            For inquiries ,please reach out to us:
+        </p>
+        <p>Call or whatsapp us on:</p>
+           
+           <p><a class="wicon" href="https://wa.me/254746902131?text=Hello%20there,%20is%20this%20still%20available?" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="whatsapp icon">+254746902131<button class="whatsapp">Chat on Whatsapp</button></a> </p> 
+         <p><a class="wicon" href="https://wa.me/254738180900?text=Hello%20there,%20is%20this%20still%20avaialble?" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/WhatsApp.svg" alt="whatsapp icon">+254738180900<button class="whatsapp">Chat on Whatsapp</button></a> </p>
+<p><a href="mailto:ecostovekenya254@gmail.com?subject=Enquiry&body=Hello%20is%20this%20still%20available?"><i class="fas fa-envelope"></i>ecostovekenya254@gmail<button class="whatsapp">Email Us</button></a></p>
+<p>Website: <a href="www.ecostoveske.com">www.ecostoveske.com</a> </p>
+<p>Thankyou for your support</p>
+<p>We appreciate your understanding and support of our mission to provide high-quality , locally produced eco stoves. Your trust is essential to us. Stay safe and informed.  </p>
+    </div>
+</div>
+</section>
+<div class="about">
+    <h2>About Us</h2>
+    <p>Hello there thanks for reaching out to Eco stoves Kenya. We are manufacturers of Volcanic Rock cookstoves.Eco stoves use reusable volacnic roocks to cook.The volcanic rocks retain heat much longer than any other fuel. Charcoal dust(lusenyente) or briquettes are used as fire starters while solar is used to power the inbuit air system that runs forced air to the stones thus increasing combustion.Save upto 80% in this tough economy and switch to Eco stove which is smoke free and save you money and time.</p>
+</div>
+</div>
+<script src="upload.js"></script>
+</body>
+</html>

@@ -6,7 +6,7 @@ let cart=JSON.parse(localStorage.getItem("cart")) || [];
 
 function fetchProducts(){
 
-    fetch("http://localhost:5000/products")
+    fetch("https://evergreendb.glitch.me/products")
     .then(response =>{
         if (!response.ok){
             throw new Error(`Server error:${response.status}${response.statusText}`);

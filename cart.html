@@ -84,20 +84,16 @@ btns.forEach(btn => {
     <div id="order-form" style="display: none;">
         <form >
         <h4>Enter Yours Details</h4>
-        <input type="tel" id="user-phone" placeholder="Phone Number (e.g. 2547XXXXXXXX)" required/>
-        <input type="text" id="address" placeholder="address line 1" required/>
-        <input type="text" id="address2" placeholder="address line 2(optional)"/>
-        <select name="city" id="city" required>
-            <option value="">Select City/Town</option>
-        </select>
-        <div id="loadingmsg">Loading cities...</div>
-        <div id="errormsg" style="display: none; color:red;">Failed to load cities!!</div>
-       
-        <input type="text" id="zip" placeholder="Zip Code" required/>
-<input type="textarea" id="landmark" placeholder="Landmark (optional)"/>
+            <input type="text" id="name" placeholder="Your Name" required>
+        <input type="tel" id="user-phone" placeholder="Phone Number (e.g. 2547XXXXXXXX)" required>
+        <input type="text" id="Location" placeholder="Delivery Location" required>
+        <input type="text" id="city" placeholder="City/Town">
+        
+
 <button type="submit">Confirm</button>
 </form> 
 </div>
+        <p id="confirmation" style="display:none;"></p>
 </main>
 <script>
     let cartItems=[];
@@ -111,35 +107,7 @@ btns.forEach(btn => {
         }
     }
     window.onload=checkcart;
-    window.onload = () => {
-            const loadingMessage = document.getElementById('loading-message');
-            const errorMessage = document.getElementById('error-message');
-            const citySelect = document.getElementById('city');
 
-    fetch('http://api.geonames.org/searchJSON?=Kenya&maxRows=100&username=breidde3065')
-    .then(response => response.json())
-    .then(data=>{
-        if (data.geonames){
-        const cities=data.geonames;
-       // const cityselect=document.getElementById('city');
-        cities.forEach(city =>{
-            const option=document.createElement('option');
-            option.value=city.name;
-            option.textContent=city.name;
-            cityselect.appendChild(option);
-        });
-loadingMessage.style.display='none';
-orderForm.style.display='block';
-    }else{
-        throw new Error("no cities found.");
-    }
-))
-    .catch(error =>{
-        console.error("Error fetchim=ng data:",error);
-        loadingMessage.style.display='none';
-        errorMessage.style.display = 'block';
-    });
-};
 </script>
     <script src="product.js"></script>
 </body>

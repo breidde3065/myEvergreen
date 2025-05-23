@@ -95,20 +95,7 @@ btns.forEach(btn => {
 </div>
         <p id="confirmation" style="display:none;"></p>
 </main>
-<script>
-    let cartItems=[];
-    function checkcart(){
-        const placeorderbtn=document.getElementById('checkout');
-       // const cartitems=[];
-        if(cartitems.length >0){
-            placeorderbtn.style.display='block';
-        }else{
-            placeorderbtn.style.display='none';
-        }
-    }
-    window.onload=checkcart;
 
-</script>
     <script src="cart.js"></script>
 </body>
 </html>

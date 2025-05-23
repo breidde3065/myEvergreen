@@ -1,13 +1,15 @@
+document.addEventListener("DOMContentLoaded",()=>{
 const placeorderbtn=document.getElementById('checkout');
 const orderform=document.getElementById('order-form');
 const form=document.getElementById('orderform');
 const confirmmsg=document.getElementById('confirmation');
 
+    if(!placeholder || !orderform || !form || !confirmmsg) return;
 placeorderbtn.addEventListener('click',()=>{
     orderform.style.display='block';
 });
 
-orderdetailsform.addEventListener('submit',async(e)=>{
+form.addEventListener('submit',async(e)=>{
     e.preventDefault();
 
     const userDetails={
@@ -33,3 +35,4 @@ orderdetailsform.addEventListener('submit',async(e)=>{
         alert(data.message || 'error placing order');
     }
 });
+    });

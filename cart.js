@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded",()=>{
 const placeorderbtn=document.getElementById('checkout');
- const orderform=document.getElementById('order-form');
 
+const form=document.getElementById('orderform');
 const confirmmsg=document.getElementById('confirmation');
 
 function placeorder(){
-   const form=document.getElementById('orderform');
-    if(form){
-        form.style.display='block';
+ const orderform=document.getElementById('order-form');  
+    if(orderform){
+        orderform.style.display='block';
     }else{
         console.error('Order form element not found.');
     }

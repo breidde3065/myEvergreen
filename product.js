@@ -101,7 +101,7 @@ function updatecart(){
         title.textContent=item.title;
 
         const price=document.createElement("p");
-        price.textContent=`Price: Kes${item.price}`;
+        price.textContent=`Price: Kes ${item.price}`;
 
         const DeleteBtn=document.createElement("button");
         DeleteBtn.textContent="Delete";
@@ -118,7 +118,7 @@ function updatecart(){
         cartitems.appendChild(li);
         total += item.price;
     });
-    totals.textContent=`Total: Kes${total.toFixed(2)}`;
+    totals.textContent=`Total: Kes ${total.toFixed(2)}`;
     placeorderbtn.style.display=cart.length > 0 ? "block" : "none";
 }
 

@@ -7,7 +7,7 @@ const form=document.getElementById('orderform');
 const confirmmsg=document.getElementById('confirmation');
 
 placeorderbtn.addEventListener("click",()=>{
- form.style.display="flex";
+ form.style.display="block";
 })
 
 console.log("checkout button:", placeorderbtn);

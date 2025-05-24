@@ -7,10 +7,14 @@ const form=document.getElementById('orderform');
 const confirmmsg=document.getElementById('confirmation');
 
 placeorderbtn.addEventListener("click",()=>{
- form.style.display="block";
+ form.style.display="flex";
 })
 
+console.log("checkout button:", placeorderbtn);
+console.log("order form:", form);
 
+
+ 
 form.addEventListener('submit',async(e)=>{
     e.preventDefault();
 
@@ -32,7 +36,7 @@ form.addEventListener('submit',async(e)=>{
         confirmmsg.innerText=data.message;
         confirmmsg.style.display='block';
         localStorage.removeItem('cart');
-        orderform.style.display='none';
+        form.style.display='none';
     }else{
         alert(data.message || 'error placing order');
     }

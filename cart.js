@@ -4,7 +4,9 @@ const orderform=document.getElementById('order-form');
 const form=document.getElementById('orderform');
 const confirmmsg=document.getElementById('confirmation');
 
-    if(!placeholder || !orderform || !form || !confirmmsg) return;
+    if(!placeholder || !orderform || !form || !confirmmsg){
+        console.error("Missing elements for order placement.");
+    return;}
 placeorderbtn.addEventListener('click',()=>{
     orderform.style.display='block';
 });

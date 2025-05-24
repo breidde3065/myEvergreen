@@ -1,17 +1,14 @@
 document.addEventListener("DOMContentLoaded",()=>{
+const cart=JSON.parse(localStorage.getItem("cart") || "[]");
+const cartItems=document.getElementById("cartitems");
+const totals=document.getElementById("totals");
 const placeorderbtn=document.getElementById('checkout');
-
 const form=document.getElementById('orderform');
 const confirmmsg=document.getElementById('confirmation');
 
-function placeorder(){
- const orderform=document.getElementById('order-form');  
-    if(orderform){
-        orderform.style.display='block';
-    }else{
-        console.error('Order form element not found.');
-    }
-}
+placeorderbtn.addEventListener("click",()=>{
+ form.style.display="block";
+})
 
 
 form.addEventListener('submit',async(e)=>{
@@ -22,7 +19,7 @@ form.addEventListener('submit',async(e)=>{
         phone:document.getElementById('phone').value,
         location:document.getElementById('location').value,
         city:document.getElementById('city').value,
-        cartItems:JSON.parse(localStorage.getItem('cart') || '[]')
+        cartItems:cart
     };
     const res=await fetch('https://evergreendb.glitch.me/place-order',{
         method:'POST',

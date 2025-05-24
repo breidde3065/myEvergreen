@@ -77,8 +77,11 @@ function updatecart(){
 
     const cartitems=document.getElementById("cartitems");
     const totals=document.getElementById("totals");
+    const placeorderbtn=document.getElementById("checkout");
+    
+    
 
-    if(!cartitems || !totals){
+    if(!cartitems || !totals || !placeorderbtn){
         console.error("ERROR: Elements not found!!");
         return;
     }
@@ -98,7 +101,7 @@ function updatecart(){
         title.textContent=item.title;
 
         const price=document.createElement("p");
-        price.textContent=`Price: $${item.price}`;
+        price.textContent=`Price: Kes${item.price}`;
 
         const DeleteBtn=document.createElement("button");
         DeleteBtn.textContent="Delete";
@@ -115,8 +118,8 @@ function updatecart(){
         cartitems.appendChild(li);
         total += item.price;
     });
-    totals.textContent=`Total: $${total.toFixed(2)}`;
-
+    totals.textContent=`Total: Kes${total.toFixed(2)}`;
+    placeorderbtn.style.display=cart.length > 0 ? "block" : "none";
 }
 
 function removeFromcart(index){

@@ -3,12 +3,22 @@ const cart=JSON.parse(localStorage.getItem("cart") || "[]");
 const cartItems=document.getElementById("cartitems");
 const totals=document.getElementById("totals");
 const placeorderbtn=document.getElementById('checkout');
-const form=document.getElementById('orderform');
+const modal=document.getElementById("orderModal");
+const closebtn=document.getElementById(".close")
+ const form=document.getElementById('orderform');
 const confirmmsg=document.getElementById('confirmation');
 
 placeorderbtn.addEventListener("click",()=>{
- form.style.display="block";
-})
+ modal.style.display="block";
+});
+ closebtn.addEventListener("click",()=>{
+  modal.style.display="none";
+ });
+ window.addEventListener("click",(e)=>{
+  if(e.target===modal){
+   modal.style.display="none";
+  }
+ });
 
 console.log("checkout button:", placeorderbtn);
 console.log("order form:", form);
@@ -36,7 +46,7 @@ form.addEventListener('submit',async(e)=>{
         confirmmsg.innerText=data.message;
         confirmmsg.style.display='block';
         localStorage.removeItem('cart');
-        form.style.display='none';
+        modal.style.display='none';
     }else{
         alert(data.message || 'error placing order');
     }

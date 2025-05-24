@@ -373,6 +373,35 @@ animation: bounce 2s infinite alternate;
 .whatsapp:hover{
     background: darkgreen;
 }
+#orderform{
+    display:none;
+    flex-direction:column;
+    gap:1rem;
+    margin-top: 20px;
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 400px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+}
+#orderform input{
+    padding:10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+#orderform button[type="submit"]{
+    background-color: #007bff;
+    color: white;
+    padding: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+#orderform button[type="submit"]: hover{
+    background-color: #0056b3;
+}
+
+
 @media(max-width:768px){
     .container{
         flex-direction: column;

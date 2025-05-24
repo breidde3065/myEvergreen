@@ -80,20 +80,21 @@ btns.forEach(btn => {
         <button id="checkout" style="display: none;" >Place Order</button>
         <button onclick="window.location.href='index.html'" id="closecart">Close</button>
     </div>
-    
-   
-        <form id="orderform" style="display: none;">
+<div id="orderModal" class="modal">
+    <div class="modal-content">
+        <span class="close">&times;</span>
+<form id="orderform" style="display: none;">
         <h4>Enter Yours Details</h4>
         <input type="text" id="name" placeholder="Your Name" required>
         <input type="tel" id="user-phone" placeholder="Phone Number (e.g. 2547XXXXXXXX)" required>
         <input type="text" id="Location" placeholder="Delivery Location" required>
         <input type="text" id="city" placeholder="City/Town">
-        
-
-<button type="submit">Confirm</button>
+        <button type="submit">Confirm</button>
 </form> 
+ <p id="confirmation" style="display:none; color:green; margin-top:10px;"></p>
 
-        <p id="confirmation" style="display:none;"></p>
+      </div>
+</div>       
 </main>
     <script src="product.js"></script>
     <script src="cart.js"></script>

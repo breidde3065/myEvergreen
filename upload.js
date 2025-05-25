@@ -39,7 +39,7 @@ if(Array.isArray(products)){
        lidescription.textContent=product.description;
 
        const liprice=document.createElement("p");
-       liprice.textContent=`Price:$${product.price}`;
+       liprice.textContent=`Price:Kes ${product.price}`;
 
        
     
@@ -100,7 +100,7 @@ function updatecart(){
         title.textContent=item.title;
 
         const price=document.createElement("p");
-        price.textContent=`Price: $${item.price}`;
+        price.textContent=`Price: Kes ${item.price}`;
 
         const DeleteBtn=document.createElement("button");
         DeleteBtn.textContent="Delete";
@@ -117,7 +117,7 @@ function updatecart(){
         cartitems.appendChild(li);
         total += item.price;
     });
-    totals.textContent=`Total: $${total.toFixed(2)}`;
+    totals.textContent=`Total: Kes ${total.toFixed(2)}`;
 
 }
 

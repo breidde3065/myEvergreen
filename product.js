@@ -66,18 +66,13 @@ cart=cart.map(item => ({...item,quantity: item.quantity || 1 }));
 
 
 function cartProduct(product){
-if(!product.id){
-    product.id='${product.title}-${product.price}';
-}
-const existingitem=cart.find(item=> item.id===product.id);
-    if(existingItem){
-        existingItem.quantity=(existingItem.quantity || 1)+1;
+
+const existingItem=cart.findIndex((item)=> item.id===product.id);
+    if(existingItem !==-1){
+             cart[existingItem].quantity += 1;
     } else{
-         const productToAdd = {
-                ...product,
-                quantity: 1
-            };
-            cart.push(productToAdd);
+        
+            cart.push({...product,quantity:1 });
     }
     
    
@@ -117,7 +112,7 @@ function updatecart(){
 
         const quantity=item.quantity || 1;
         const price= document.createElement("p");
-        price.textContent=`Price: Kes ${item.price} x ${quantity}= Kes ${(item.price * quantity).toFixed(2)}`;
+        price.textContent=`Price: Kes ${item.price} x ${item.quantity}= Kes ${item.price *item.quantity}`;
 
         const DeleteBtn=document.createElement("button");
         DeleteBtn.textContent="Delete";
@@ -132,7 +127,7 @@ function updatecart(){
         
 
         cartitems.appendChild(li);
-        total += item.price * quantity;
+        total += item.price * item.quantity;
     });
     totals.textContent=`Total: Kes ${total.toFixed(2)}`;
     placeorderbtn.style.display=cart.length > 0 ? "block" : "none";
@@ -147,7 +142,8 @@ updatecartcount();
 function updatecartcount(){
     const cartcount=document.getElementById("cartcount");
     if(cartcount){
-        cartcount.textContent=cart.length;
+        const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
+        cartcount.textContent=totalQuantity ;
     }
 }
 fetchProducts();

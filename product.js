@@ -64,8 +64,16 @@ let cart =JSON.parse(localStorage.getItem("cart")) || [];
 
 
 function cartProduct(product){
+
+const existingitem=cart.find(item=> item.id===product.id);
+    if(existingItem){
+        existingItem.quantity=(existingItem.quantity || 1)+1;
+    } else{
+        product.quantity=1;
+        cart.push(product);
+    }
+    
    
-    cart.push(product);
    localStorage.setItem("cart",JSON.stringify(cart));
    updatecart();
    updatecartcount();

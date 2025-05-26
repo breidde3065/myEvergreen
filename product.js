@@ -68,6 +68,7 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   function updatecart() {
+    const placeorderbtn = document.getElementById("checkout");
     const cartitems = document.getElementById("cartitems");
     const totals = document.getElementById("totals");
     const placeorderbtn = document.getElementById("checkout");
@@ -113,7 +114,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     totals.textContent = `Total: Kes ${total.toFixed(2)}`;
-    placeorderbtn.style.display = cart.length > 0 ? "block" : "none";
+   if (placeorderbtn) {
+  placeorderbtn.style.display = cart.length > 0 ? "block" : "none";
+}
+
   }
 
   function removeFromcart(index) {

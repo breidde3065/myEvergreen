@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded",function(){
 let cart =JSON.parse(localStorage.getItem("cart")) || [];
-cart=cart.map(item => ({...item,quantity: item.quantity || 1 }));
+
     function fetchProducts(){
 
         fetch("https://evergreendb.glitch.me/products")

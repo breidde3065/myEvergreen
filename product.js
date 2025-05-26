@@ -117,7 +117,7 @@ function updatecart(){
 
         const quantity=item.quantity || 1;
         const price= document.createElement("p");
-        price.textContent='Price: Kes ${item.price} x ${quantity}= Kes ${(item.price * quantity).toFixed(2)}';
+        price.textContent=`Price: Kes ${item.price} x ${quantity}= Kes ${(item.price * quantity).toFixed(2)}`;
 
         const DeleteBtn=document.createElement("button");
         DeleteBtn.textContent="Delete";

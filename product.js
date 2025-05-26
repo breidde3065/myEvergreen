@@ -103,7 +103,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       const price = document.createElement("p");
       // Show price × quantity and total for item
-      price.textContent = `Price: Kes ${item.price} x ${item.quantity} = Kes ${(item.price * item.quantity).toFixed(2)}`;
+      price.textContent = `Price: Kes ${item.price}`;
 
       const DeleteBtn = document.createElement("button");
       DeleteBtn.textContent = "Delete";
@@ -118,7 +118,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       cartitems.appendChild(li);
 
-      total += item.price * item.quantity;
+      total += item.price ;
     });
 
     totals.textContent = `Total: Kes ${total.toFixed(2)}`;

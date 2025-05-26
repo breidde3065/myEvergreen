@@ -23,6 +23,9 @@ cart=cart.map(item => ({...item,quantity: item.quantity || 1 }));
     
     
         products.forEach(product => {
+            if(!product.id){
+                product.id='${product.title}-${product.price}';
+            }
             const li = document.createElement("li");
            const img=document.createElement("img");
            img.src=product.imageUpload;
@@ -59,18 +62,22 @@ cart=cart.map(item => ({...item,quantity: item.quantity || 1 }));
     })
     .catch(error => console.error("Error fetching products:", error));
     }
-
     
 
 
 function cartProduct(product){
-
+if(!product.id){
+    product.id='${product.title}-${product.price}';
+}
 const existingitem=cart.find(item=> item.id===product.id);
     if(existingItem){
         existingItem.quantity=(existingItem.quantity || 1)+1;
     } else{
-        product.quantity=1;
-        cart.push(product);
+         const productToAdd = {
+                ...product,
+                quantity: 1
+            };
+            cart.push(productToAdd);
     }
     
    
@@ -110,7 +117,7 @@ function updatecart(){
 
         const quantity=item.quantity || 1;
         const price= document.createElement("p");
-        price.textContent='Price: Kes ${item.price} x ${quantity}= Kes ${item.price * quantity}';
+        price.textContent='Price: Kes ${item.price} x ${quantity}= Kes ${(item.price * quantity).toFixed(2)}';
 
         const DeleteBtn=document.createElement("button");
         DeleteBtn.textContent="Delete";

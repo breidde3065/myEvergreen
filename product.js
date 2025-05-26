@@ -114,9 +114,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     totals.textContent = `Total: Kes ${total.toFixed(2)}`;
-   if (placeorderbtn) {
-  placeorderbtn.style.display = cart.length > 0 ? "block" : "none";
-}
+  document.getElementById("checkout").style.display = cart.length > 0 ? "block" : "none";
+
 
   }
 

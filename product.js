@@ -91,6 +91,9 @@ document.addEventListener("DOMContentLoaded", function () {
     let total = 0;
 
     cart.forEach((item, index) => {
+      // Fix: default quantity to 1 if undefined
+      const quantity = item.quantity || 1;
+
       const li = document.createElement("li");
 
       const img = document.createElement("img");
@@ -102,8 +105,7 @@ document.addEventListener("DOMContentLoaded", function () {
       title.textContent = item.title;
 
       const price = document.createElement("p");
-      // Show price × quantity and total for item
-      price.textContent = `Price: Kes ${item.price}`;
+      price.textContent = `Price: Kes ${item.price} x ${quantity} = Kes ${(item.price * quantity).toFixed(2)}`;
 
       const DeleteBtn = document.createElement("button");
       DeleteBtn.textContent = "Delete";
@@ -118,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       cartitems.appendChild(li);
 
-      total += item.price ;
+      total += item.price * quantity;
     });
 
     totals.textContent = `Total: Kes ${total.toFixed(2)}`;
@@ -136,7 +138,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const cartcount = document.getElementById("cartcount");
     if (cartcount) {
       // Show sum of quantities, not just array length
-      const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+      const totalQuantity = cart.reduce((sum, item) => sum + (item.quantity || 1), 0);
       cartcount.textContent = totalQuantity;
     }
   }

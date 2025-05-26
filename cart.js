@@ -9,7 +9,7 @@ const closebtn=document.getElementById(".close")
 const confirmmsg=document.getElementById('confirmation');
 
 placeorderbtn.addEventListener("click",()=>{
- modal.style.display="block";
+ modal.style.display="flex";
 });
  closebtn.addEventListener("click",()=>{
   modal.style.display="none";

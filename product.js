@@ -1,3 +1,4 @@
+
 document.addEventListener("DOMContentLoaded",function(){
 let cart =JSON.parse(localStorage.getItem("cart")) || [];
 
@@ -23,9 +24,6 @@ let cart =JSON.parse(localStorage.getItem("cart")) || [];
     
     
         products.forEach(product => {
-            if(!product.id){
-                product.id='${product.title}-${product.price}';
-            }
             const li = document.createElement("li");
            const img=document.createElement("img");
            img.src=product.imageUpload;
@@ -62,20 +60,13 @@ let cart =JSON.parse(localStorage.getItem("cart")) || [];
     })
     .catch(error => console.error("Error fetching products:", error));
     }
+
     
 
 
 function cartProduct(product){
-
-const existingItem=cart.find((item)=> item.id===product.id);
-    if(existingItem){
-        existingItem.quantity = (existingItem.quantity || 1) + 1;
-    } else{
-             product.quantity = 1;
-            cart.push(product);
-    }
-    
    
+    cart.push(product);
    localStorage.setItem("cart",JSON.stringify(cart));
    updatecart();
    updatecartcount();
@@ -110,9 +101,8 @@ function updatecart(){
         const title=document.createElement("h4");
         title.textContent=item.title;
 
-        const quantity=item.quantity || 1;
-        const price= document.createElement("p");
-        price.textContent=`Price: Kes ${item.price} x ${item.quantity}= Kes ${item.price *item.quantity}`;
+        const price=document.createElement("p");
+        price.textContent=`Price: Kes ${item.price}`;
 
         const DeleteBtn=document.createElement("button");
         DeleteBtn.textContent="Delete";
@@ -127,7 +117,7 @@ function updatecart(){
         
 
         cartitems.appendChild(li);
-        total += item.price * item.quantity;
+        total += item.price;
     });
     totals.textContent=`Total: Kes ${total.toFixed(2)}`;
     placeorderbtn.style.display=cart.length > 0 ? "block" : "none";
@@ -142,8 +132,7 @@ updatecartcount();
 function updatecartcount(){
     const cartcount=document.getElementById("cartcount");
     if(cartcount){
-        const totalQuantity = cart.reduce((acc, item) => acc + item.quantity, 0);
-        cartcount.textContent=totalQuantity ;
+        cartcount.textContent=cart.length;
     }
 }
 fetchProducts();

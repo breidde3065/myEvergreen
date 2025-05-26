@@ -1,6 +1,6 @@
 document.addEventListener("DOMContentLoaded",function(){
 let cart =JSON.parse(localStorage.getItem("cart")) || [];
-
+cart=cart.map(item => ({...item,quantity: item.quantity || 1 }));
     function fetchProducts(){
 
         fetch("https://evergreendb.glitch.me/products")
@@ -108,8 +108,9 @@ function updatecart(){
         const title=document.createElement("h4");
         title.textContent=item.title;
 
-        const price=document.createElement("p");
-        price.textContent=`Price: Kes ${item.price}`;
+        const quantity=item.quantity || 1;
+        const price= document.createElement("p");
+        price.textContent='Price: Kes ${item.price} x ${quantity}= Kes ${item.price * quantity}';
 
         const DeleteBtn=document.createElement("button");
         DeleteBtn.textContent="Delete";
@@ -124,7 +125,7 @@ function updatecart(){
         
 
         cartitems.appendChild(li);
-        total += item.price;
+        total += item.price * quantity;
     });
     totals.textContent=`Total: Kes ${total.toFixed(2)}`;
     placeorderbtn.style.display=cart.length > 0 ? "block" : "none";

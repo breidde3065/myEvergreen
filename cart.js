@@ -7,6 +7,7 @@ const modal=document.getElementById("orderModal");
 const closebtn=document.querySelector(".close")
  const form=document.getElementById('orderform');
 const confirmmsg=document.getElementById('confirmation');
+document.getElementById("cartsection").style.display = "block";
 
 placeorderbtn.addEventListener("click",()=>{
  modal.style.display="flex";

@@ -1,137 +1,138 @@
-document.addEventListener("DOMContentLoaded",function(){
-let cart =JSON.parse(localStorage.getItem("cart")) || [];
+document.addEventListener("DOMContentLoaded", function () {
+  // Load cart from localStorage or empty array
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
-    function fetchProducts(){
-
-        fetch("http://localhost:5000/products")
-        .then(response =>{
-            if (!response.ok){
-                throw new Error(`Server error:${response.status}${response.statusText}`);
-            }
-        
+  function fetchProducts() {
+    fetch("https://evergreendb.glitch.me/products")
+      .then((response) => {
+        if (!response.ok) {
+          throw new Error(`Server error: ${response.status} ${response.statusText}`);
+        }
         return response.json();
-    })
-    .then(products => {
+      })
+      .then((products) => {
         const productlist = document.getElementById("productlist");
-        if(!productlist){
-            console.error("Error: Product list element not found.");
-            return;
+        if (!productlist) {
+          console.error("Error: Product list element not found.");
+          return;
         }
         productlist.innerHTML = ""; // Clear existing list
-    
-    if(Array.isArray(products)){
-    
-    
-        products.forEach(product => {
+
+        if (Array.isArray(products)) {
+          products.forEach((product) => {
             const li = document.createElement("li");
-           const img=document.createElement("img");
-           img.src=product.imageUpload;
-           img.alt=product.title;
-           img.style.maxWidth="150px";
-           
-           const lititle=document.createElement("h3");
-           lititle.textContent=product.title;
-    
-           const lidescription=document.createElement("p");
-           lidescription.textContent=product.description;
-    
-           const liprice=document.createElement("p");
-           liprice.textContent=`Price:Kes ${product.price}`;
-    
-           
-        
-    
-           
-    const add2cart=document.createElement("button");
-    add2cart.textContent="Add to Cart";
-    add2cart.addEventListener("click",function(){
-        cartProduct(product);
-    });
-          
-                li.appendChild(img);
-                li.appendChild(lititle);
-                li.appendChild(lidescription);
-                li.appendChild(liprice);
-    li.appendChild(add2cart);
+
+            const img = document.createElement("img");
+            img.src = product.imageUpload;
+            img.alt = product.title;
+            img.style.maxWidth = "150px";
+
+            const lititle = document.createElement("h3");
+            lititle.textContent = product.title;
+
+            const lidescription = document.createElement("p");
+            lidescription.textContent = product.description;
+
+            const liprice = document.createElement("p");
+            liprice.textContent = `Price: Kes ${product.price}`;
+
+            const add2cart = document.createElement("button");
+            add2cart.textContent = "Add to Cart";
+            add2cart.addEventListener("click", function () {
+              cartProduct(product);
+            });
+
+            li.appendChild(img);
+            li.appendChild(lititle);
+            li.appendChild(lidescription);
+            li.appendChild(liprice);
+            li.appendChild(add2cart);
+
             productlist.appendChild(li);
-        });
-    }
-    })
-    .catch(error => console.error("Error fetching products:", error));
-    }
+          });
+        }
+      })
+      .catch((error) => console.error("Error fetching products:", error));
+  }
 
+  // Add product to cart or increase quantity if already exists
+  function cartProduct(product) {
+   
+      cart.push(product);
     
 
+    // Save updated cart
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updatecart();
+    updatecartcount();
+  }
 
-function cartProduct(product){
-   
-    cart.push(product);
-   localStorage.setItem("cart",JSON.stringify(cart));
-   updatecart();
-   updatecartcount();
-}
-function updatecart(){
+  function updatecart() {
+    const cartitems = document.getElementById("cartitems");
+    const totals = document.getElementById("totals");
+    const placeorderbtn = document.getElementById("checkout");
 
-    
-   
-
-    const cartitems=document.getElementById("cartitems");
-    const totals=document.getElementById("totals");
-
-    if(!cartitems || !totals){
-        console.error("ERROR: Elements not found!!");
-        return;
+    if (!cartitems || !totals || !placeorderbtn) {
+      console.error("ERROR: Elements not found!!");
+      return;
     }
 
-    cartitems.innerHTML="";
+    cartitems.innerHTML = "";
 
-    let total=0;
+    let total = 0;
 
-    cart.forEach((item,index)=>{
-        const li= document.createElement("li");
-        const img=document.createElement("img");
-        img.src=item.imageUpload;
-        img.alt=item.title;
-        img.style.maxWidth="100px";
+    cart.forEach((item, index) => {
+      const li = document.createElement("li");
 
-        const title=document.createElement("h4");
-        title.textContent=item.title;
+      const img = document.createElement("img");
+      img.src = item.imageUpload;
+      img.alt = item.title;
+      img.style.maxWidth = "100px";
 
-        const price=document.createElement("p");
-        price.textContent=`Price: Kes ${item.price}`;
+      const title = document.createElement("h4");
+      title.textContent = item.title;
 
-        const DeleteBtn=document.createElement("button");
-        DeleteBtn.textContent="Delete";
-        DeleteBtn.addEventListener("click",function(){
-            removeFromcart(index);
-        });
-        li.appendChild(img);
-        li.appendChild(title);
-        li.appendChild(price);
-        li.appendChild(DeleteBtn);
+      const price = document.createElement("p");
+      // Show price × quantity and total for item
+      price.textContent = `Price: Kes ${item.price}`;
 
-        
+      const DeleteBtn = document.createElement("button");
+      DeleteBtn.textContent = "Delete";
+      DeleteBtn.addEventListener("click", function () {
+        removeFromcart(index);
+      });
 
-        cartitems.appendChild(li);
-        total += item.price;
+      li.appendChild(img);
+      li.appendChild(title);
+      li.appendChild(price);
+      li.appendChild(DeleteBtn);
+
+      cartitems.appendChild(li);
+
+      total += item.price;
     });
-    totals.textContent=`Total: Kes ${total.toFixed(2)}`;
 
-}
+    totals.textContent = `Total: Kes ${total.toFixed(2)}`;
+    placeorderbtn.style.display = cart.length > 0 ? "block" : "none";
+  }
 
-function removeFromcart(index){
-cart.splice(index,1);
-localStorage.setItem("cart",JSON.stringify(cart));
-updatecart();
-updatecartcount();
-}
-function updatecartcount(){
-    const cartcount=document.getElementById("cartcount");
-    if(cartcount){
-        cartcount.textContent=cart.length;
+  function removeFromcart(index) {
+    cart.splice(index, 1);
+    localStorage.setItem("cart", JSON.stringify(cart));
+    updatecart();
+    updatecartcount();
+  }
+
+  function updatecartcount() {
+    const cartcount = document.getElementById("cartcount");
+    if (cartcount) {
+      // Show sum of quantities, not just array length
+      const totalQuantity = cart.reduce((sum, item) => sum + item.quantity, 0);
+      cartcount.textContent = totalQuantity;
     }
-}
-fetchProducts();
-updatecartcount();
-updatecart();
+  }
+
+  fetchProducts();
+  updatecartcount();
+  updatecart();
 });

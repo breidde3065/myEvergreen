@@ -33,7 +33,7 @@ form.addEventListener('submit',async(e)=>{
 
     const userDetails={
         name:document.getElementById('name').value,
-        phone:document.getElementById('phone').value,
+        phone:document.getElementById('user-phone').value,
         location:document.getElementById('location').value,
         city:document.getElementById('city').value,
         cartItems:cart
@@ -49,7 +49,10 @@ form.addEventListener('submit',async(e)=>{
         confirmmsg.innerText=data.message;
         confirmmsg.style.display='block';
         localStorage.removeItem('cart');
-        modal.style.display='none';
+        setTimeout(() =>{
+         modal.style.display='none';
+        },2000);
+        
     }else{
         alert(data.message || 'error placing order');
     }

@@ -65,6 +65,7 @@ document.addEventListener("DOMContentLoaded", function () {
     localStorage.setItem("cart", JSON.stringify(cart));
     updatecart();
     updatecartcount();
+    document.getElementById("checkout").style.display = "block";
   }
 
   function updatecart() {
@@ -114,8 +115,8 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     totals.textContent = `Total: Kes ${total.toFixed(2)}`;
-  document.getElementById("checkout").style.display = cart.length > 0 ? "block" : "none";
-
+ 
+  placeorderbtn.style.display = cart.length > 0 ? "block" : "none";
 
   }
 

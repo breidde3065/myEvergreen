@@ -4,7 +4,7 @@ const cartItems=document.getElementById("cartitems");
 const totals=document.getElementById("totals");
 const placeorderbtn=document.getElementById('checkout');
 const modal=document.getElementById("orderModal");
-const closebtn=document.getElementById(".close")
+const closebtn=document.querySelector(".close")
  const form=document.getElementById('orderform');
 const confirmmsg=document.getElementById('confirmation');
 
